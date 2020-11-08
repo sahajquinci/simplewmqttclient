@@ -1,0 +1,106 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E3121C2C-47DB-479B-9D35-48D743249643}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>sahajquinci.MQTT_Client</RootNamespace>
+    <AssemblyName>sahajquinci.MQTT_Client</AssemblyName>
+    <ProjectTypeGuids>{0B4745B0-194B-4BB6-8E21-E9057CA92500};{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <DeployDirSuffix>SmartDeviceProject1</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowedReferenceRelatedFileExtensions>.allowedReferenceRelatedFileExtensions</AllowedReferenceRelatedFileExtensions>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FileAlignment>512</FileAlignment>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowedReferenceRelatedFileExtensions>.allowedReferenceRelatedFileExtensions</AllowedReferenceRelatedFileExtensions>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FileAlignment>512</FileAlignment>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="SimplSharpCustomAttributesInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\ProgramData\Crestron\SDK\SimplSharpCustomAttributesInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpHelperInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\ProgramData\Crestron\SDK\SimplSharpHelperInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Events\BadPayloadReceivedEventArgs.cs" />
+    <Compile Include="Events\ConnectionStateChangedEventArgs.cs" />
+    <Compile Include="Events\ErrorOccuredEventArgs.cs" />
+    <Compile Include="Events\MessageReceivedEventArgs.cs" />
+    <Compile Include="Events\PacketToSendEventArgs.cs" />
+    <Compile Include="Exceptions\MqttClientException.cs" />
+    <Compile Include="Exceptions\MqttCommunicationException.cs" />
+    <Compile Include="Exceptions\MqttConnectionException.cs" />
+    <Compile Include="Exceptions\MqttTimeoutException.cs" />
+    <Compile Include="Managers\MqttPublisherManager.cs" />
+    <Compile Include="Managers\MqttSessionManager.cs" />
+    <Compile Include="Messages\Enums\MqttMsgState.cs" />
+    <Compile Include="Messages\MqttMsgBase.cs" />
+    <Compile Include="Messages\MqttMsgConnack.cs" />
+    <Compile Include="Messages\MqttMsgConnect.cs" />
+    <Compile Include="Messages\MqttMsgContext.cs" />
+    <Compile Include="Messages\MqttMsgDisconnect.cs" />
+    <Compile Include="Messages\MqttMsgPingReq.cs" />
+    <Compile Include="Messages\MqttMsgPingResp.cs" />
+    <Compile Include="Messages\MqttMsgPuback.cs" />
+    <Compile Include="Messages\MqttMsgPubcomp.cs" />
+    <Compile Include="Messages\MqttMsgPublish.cs" />
+    <Compile Include="Messages\MqttMsgPubrec.cs" />
+    <Compile Include="Messages\MqttMsgPubrel.cs" />
+    <Compile Include="Messages\MqttMsgSuback.cs" />
+    <Compile Include="Messages\MqttMsgSubscribe.cs" />
+    <Compile Include="Messages\MqttMsgUnsuback.cs" />
+    <Compile Include="Messages\MqttMsgUnsubscribe.cs" />
+    <Compile Include="MqttClient.cs" />
+    <Compile Include="MqttSettings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\MqttClientSession.cs" />
+    <Compile Include="Session\MqttSession.cs" />
+    <Compile Include="Utility\ClientType.cs" />
+    <Compile Include="Utility\MsgBuilder.cs" />
+    <Compile Include="Utility\PacketDecoder.cs" />
+    <Compile Include="Utility\PayloadMapper.cs" />
+    <None Include="Properties\ControlSystem.cfg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rem  S# preparation will execute after these operations</PostBuildEvent>
+  </PropertyGroup>
+</Project>
