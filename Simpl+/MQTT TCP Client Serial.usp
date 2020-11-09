@@ -8,6 +8,8 @@
 
 STRING_PARAMETER Username[20];
 STRING_PARAMETER Password[20];
+STRING_PARAMETER SSLCertificateFileName[30];
+STRING_PARAMETER SSLPrivateKeyFileName[30];
 INTEGER_PARAMETER Port;
 STRING_PARAMETER ServerIP[14];
 INTEGER_PARAMETER BufferSize;
@@ -21,14 +23,14 @@ STRING_PARAMETER WillMessage[255];
 INTEGER_PARAMETER PublishQoSLevel;
 INTEGER_PARAMETER Retain;
 INTEGER_PARAMETER CleanSession;
-STRING_PARAMETER _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,Topic[255][20];
+STRING_PARAMETER _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,Topic[255][20];
 STRING_OUTPUT ErrorOccured;
-DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_
+DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_
 ,Log,Start,Stop;
 ANALOG_INPUT LogLevel;
-STRING_INPUT _skip_,_skip_,PUBLISH_TO_TOPIC[255][20];
-DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,ConnectionState,_skip_,_skip_,_skip_;
-STRING_OUTPUT _skip_,TopicMessage[255];
+STRING_INPUT _skip_,_skip_,_skip_,_skip_,PUBLISH_TO_TOPIC[255][20];
+DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,ConnectionState,_skip_,_skip_,_skip_;
+STRING_OUTPUT _skip_,_skip_,_skip_,TopicMessage[255];
 
 
 //Patameters properties
@@ -185,7 +187,7 @@ function Main()
 	WaitForInitializationComplete();
 	cType = ClientType.SERIAL;
 	client.Log(Log);
-	client.Initialize(Username,Password,Port,ServerIP,BufferSize,ID,WillFlag,WillRetain,WillQos,WillTopic,WillMessage,KeepAlivePeriod,cType,PublishQoSLevel,Retain,CleanSession);
+	client.Initialize(Username,Password,Port,ServerIP,BufferSize,ID,WillFlag,WillRetain,WillQos,WillTopic,WillMessage,KeepAlivePeriod,cType,PublishQoSLevel,Retain,CleanSession,SSLCertificateFileName,SSLPrivateKeyFileName);
 	init();
 	PassTopics();
 }

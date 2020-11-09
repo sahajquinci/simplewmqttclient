@@ -2,6 +2,10 @@
 A MQTT client module for Crestron 3-Series Control Systems written in SIMPL#
 
 
+# How to use
+Fill the information required for the connection as in the image
+![alt text](ClientExample.png "Example")
+
 ## Donation
 If this module saves you time feel free to show your appreciation using the following button :D  
 
