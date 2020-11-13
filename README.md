@@ -3,6 +3,11 @@ A MQTT client module for Crestron 3-Series Control Systems written in SIMPL#
 
 
 # How to use
+
+**SSL MUST BE ENABLED ON THE CONTROL SYSTEM**
+
+![alt text](SSL.png " The default settings work fine as well.")
+
 Fill the information required for the connection as in the image
 ![alt text](ClientExample.png "Example")
 
