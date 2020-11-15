@@ -196,6 +196,8 @@ namespace sahajquinci.MQTT_Client.Messages
             {
                 buffer[j] = data[i];
             }
+            //Skipping bytes indicating the lenght of payload
+            index += remainingLength > 127 ? 1 : (remainingLength > 16383 ? 2 : (remainingLength > 2097151 ? 3 : 0));
             // read bytes from socket...
             int received = data.Length;
             // topic name
