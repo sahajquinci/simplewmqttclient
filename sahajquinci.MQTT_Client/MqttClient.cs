@@ -258,7 +258,7 @@ namespace sahajquinci.MQTT_Client
         public void Publish(string topic, string value)
         {
             byte[] payload = Encoding.ASCII.GetBytes(value);
-            MqttMsgPublish msg = MsgBuilder.BuildPublish(topic, false, (byte)this.PublishQoSLevel, true, payload, GetNewPacketIdentifier());
+            MqttMsgPublish msg = MsgBuilder.BuildPublish(topic, false, (byte)this.PublishQoSLevel, Retain, payload, GetNewPacketIdentifier());
             publisherManager.Publish(msg);
             if (this.PublishQoSLevel == 0x00)
                 FreePacketIdentifier(msg.MessageId);
