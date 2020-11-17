@@ -196,6 +196,7 @@ function Main()
 	cType = ClientType.DIGITAL;
 	client.Log(Log);
 	client.Initialize(Username,Password,Port,ServerIP,BufferSize,ID,WillFlag,WillRetain,WillQos,WillTopic,WillMessage,KeepAlivePeriod,cType,PublishQoSLevel,Retain,CleanSession,SSLCertificateFileName,SSLPrivateKeyFileName);
+	init();
 	PassTopics();
 	mutex.ReleaseMutex();
 }
