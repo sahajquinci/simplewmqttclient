@@ -2,9 +2,10 @@
 #DEFAULT_VOLATILE
 #ENABLE_STACK_CHECKING
 #ENABLE_TRACE
-#ANALOG_SERIAL_EXPAND AllWithAny
-#SYMBOL_NAME "MQTTClient Serial 1.0"
-#USER_SIMPLSHARP_LIBRARY "sahajquinci.MQTT_Client"
+#DIGITAL_EXPAND AllWithAny
+#ANALOG_SERIAL_EXPAND OutputsWithParams
+#SYMBOL_NAME "MQTTClient Digital No_TLS"
+#USER_SIMPLSHARP_LIBRARY "sahajquinci.MQTT_Client_NoTlS"
 
 STRING_PARAMETER Username[20];
 STRING_PARAMETER Password[20];
@@ -23,15 +24,14 @@ STRING_PARAMETER WillMessage[255];
 INTEGER_PARAMETER PublishQoSLevel;
 INTEGER_PARAMETER Retain;
 INTEGER_PARAMETER CleanSession;
-STRING_PARAMETER _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,Topic[255][20];
-STRING_OUTPUT ErrorOccured;
+STRING_PARAMETER _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,Topic[255][20];
+STRING_OUTPUT _skip_,_skip_,_skip_,ErrorOccured;
 DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_
-,Log,Start,Stop;
-ANALOG_INPUT LogLevel;
-STRING_INPUT _skip_,_skip_,_skip_,_skip_,PUBLISH_TO_TOPIC[255][20];
-DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,ConnectionState,_skip_,_skip_,_skip_;
-STRING_OUTPUT _skip_,_skip_,_skip_,TopicMessage[255];
-
+,Log,Start,Stop,
+_skip_,_skip_,_skip_,_skip_,PUBLISH_TO_TOPIC[255];
+ANALOG_INPUT _skip_,_skip_,_skip_,LogLevel;
+DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,ConnectionState,_skip_,_skip_,_skip_,_skip_
+,_skip_,_skip_,TopicMessage[255];
 
 //Patameters properties
 #BEGIN_PARAMETER_PROPERTIES WillRetain , WillFlag , Retain , CleanSession
@@ -115,7 +115,7 @@ function PassTopics()
 		{
 			break;			
 		}
-		client.AddTopic(Topic[i]);
+		client.AddTopic(Topic[i]);	
 	}
 }
 
@@ -123,7 +123,7 @@ THREADSAFE CHANGE PUBLISH_TO_TOPIC
 {
 	integer i;
 	i = GetLastModifiedArrayIndex ();
-	client.Publish(Topic[i],PUBLISH_TO_TOPIC[i]);
+	client.Publish(Topic[i],ITOA(PUBLISH_TO_TOPIC[i]));
 	
 }
 
@@ -175,21 +175,30 @@ eventhandler MessageArrivedEventHandler(MqttClient client, MessageReceivedEventA
 	{
 		if(Topic[i] = e.Topic)
 		{
-			TopicMessage[i] = e.Value;		
+			if(e.Value = "0")
+			{
+				TopicMessage[i] = 0;		
+			}
+			else
+			{
+				TopicMessage[i] = 1;	
+			}
 		}	
 	}
 
 }
 
- 
+CMutex mutex;
 function Main()
 {
 	WaitForInitializationComplete();
-	cType = ClientType.SERIAL;
+	mutex.WaitForMutex(); 
+	cType = ClientType.DIGITAL;
 	client.Log(Log);
 	client.Initialize(Username,Password,Port,ServerIP,BufferSize,ID,WillFlag,WillRetain,WillQos,WillTopic,WillMessage,KeepAlivePeriod,cType,PublishQoSLevel,Retain,CleanSession,SSLCertificateFileName,SSLPrivateKeyFileName);
 	init();
 	PassTopics();
+	mutex.ReleaseMutex();
 }
 
 

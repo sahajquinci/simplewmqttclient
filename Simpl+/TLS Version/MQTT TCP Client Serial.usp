@@ -3,8 +3,8 @@
 #ENABLE_STACK_CHECKING
 #ENABLE_TRACE
 #ANALOG_SERIAL_EXPAND AllWithAny
-#SYMBOL_NAME "MQTTClient Analog 1.0"
-#USER_SIMPLSHARP_LIBRARY "sahajquinci.MQTT_Client"
+#SYMBOL_NAME "MQTTClient Serial TLS"
+#USER_SIMPLSHARP_LIBRARY "sahajquinci.MQTT_Client_TLS"
 
 STRING_PARAMETER Username[20];
 STRING_PARAMETER Password[20];
@@ -28,9 +28,9 @@ STRING_OUTPUT ErrorOccured;
 DIGITAL_INPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_
 ,Log,Start,Stop;
 ANALOG_INPUT LogLevel;
-ANALOG_INPUT _skip_,_skip_,_skip_,_skip_,PUBLISH_TO_TOPIC[255];
+STRING_INPUT _skip_,_skip_,_skip_,_skip_,PUBLISH_TO_TOPIC[255][20];
 DIGITAL_OUTPUT _skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,_skip_,ConnectionState,_skip_,_skip_,_skip_;
-ANALOG_OUTPUT _skip_,_skip_,_skip_,TopicMessage[255];
+STRING_OUTPUT _skip_,_skip_,_skip_,TopicMessage[255];
 
 
 //Patameters properties
@@ -123,7 +123,7 @@ THREADSAFE CHANGE PUBLISH_TO_TOPIC
 {
 	integer i;
 	i = GetLastModifiedArrayIndex ();
-	client.Publish(Topic[i],ITOA(PUBLISH_TO_TOPIC[i]));
+	client.Publish(Topic[i],PUBLISH_TO_TOPIC[i]);
 	
 }
 
@@ -174,24 +174,22 @@ eventhandler MessageArrivedEventHandler(MqttClient client, MessageReceivedEventA
 	for(i = 1 to arraySize)
 	{
 		if(Topic[i] = e.Topic)
-		{	
-			TopicMessage[i] = Atoi(e.Value);		
+		{
+			TopicMessage[i] = e.Value;		
 		}	
 	}
-}
-CMutex mutex;
 
+}
+
+ 
 function Main()
 {
 	WaitForInitializationComplete();
-	mutex.WaitForMutex(); 
-	cType = ClientType.ANALOG;
+	cType = ClientType.SERIAL;
 	client.Log(Log);
 	client.Initialize(Username,Password,Port,ServerIP,BufferSize,ID,WillFlag,WillRetain,WillQos,WillTopic,WillMessage,KeepAlivePeriod,cType,PublishQoSLevel,Retain,CleanSession,SSLCertificateFileName,SSLPrivateKeyFileName);
 	init();
 	PassTopics();
-	mutex.ReleaseMutex(); 
-
 }
 
 
