@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplMqttClient", "SimplMqttClient.csproj", "{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseSSL|Any CPU = ReleaseSSL|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}.ReleaseSSL|Any CPU.ActiveCfg = ReleaseSSL|Any CPU
+		{C1B4EA60-4C66-4AD6-90A1-078BDB2C456A}.ReleaseSSL|Any CPU.Build.0 = ReleaseSSL|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A80D7441-1710-4A41-94C8-340BFFD60685}
+	EndGlobalSection
+EndGlobal
